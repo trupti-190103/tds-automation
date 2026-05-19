@@ -106,26 +106,35 @@ def process_contractor_1024_tds(uploaded_file):
     ws.title = "Contractor TDS"
 
     # =========================
-    # HEADER SECTION
+    # COPY ORIGINAL HEADER
     # =========================
 
-    ws.merge_cells('A1:N1')
-    ws['A1'] = 'Plastipack (2025-2026)'
+    original_wb = pd.read_excel(
+        uploaded_file,
+        header=None,
+        nrows=5
+    )
 
-    ws.merge_cells('A2:N2')
-    ws['A2'] = 'TDS on Contractor ( Other Than Individual)1024 Code'
+    for row_index, row_data in original_wb.iterrows():
+        for col_index, value in enumerate(row_data, start=1):
 
-    ws.merge_cells('A3:N3')
-    ws['A3'] = 'Ledger Account'
+            ws.cell(
+                row=row_index + 1,
+                column=col_index
+            ).value = value
 
-    ws.merge_cells('A5:N5')
-    ws['A5'] = '1-Apr-26 to 30-Apr-26'
-
+    # BOLD HEADER
     bold_font = Font(bold=True)
+    for row in range(1, 6):
+        for col in range(1, 15):
+            ws.cell(row, col).font = bold_font
 
-    for cell in ['A1', 'A2', 'A3', 'A5']:
 
-        ws[cell].font = bold_font
+
+   
+    
+
+
 
     # =========================
     # TABLE HEADERS

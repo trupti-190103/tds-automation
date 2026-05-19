@@ -23,7 +23,7 @@ tds_type = st.selectbox(
     "Select TDS Type",
     [
         "TDS on Purchase of Goods 1031 Code",
-        "TDS on Contractor 1023 Code",
+        "TDS on Contractor 1023 (individual)Code",
         "TDS on Contractor ( Other Than Individual)1024 Code",
         "TDS on Professional Fee. Sec194J(B) 1027 Code"
     ]
@@ -47,7 +47,7 @@ if uploaded_file is not None:
             # PURCHASE TDS
             # =========================
 
-            if tds_type == "TDS on Purchase of Goods 1031":
+            if tds_type == "TDS on Purchase of Goods 1031 Code":
 
                 wb = process_purchase_tds(uploaded_file)
 
@@ -59,7 +59,7 @@ if uploaded_file is not None:
             # CONTRACTOR TDS
             # =========================
 
-            elif tds_type == "TDS on Contractor 1023":
+            elif tds_type == "TDS on Contractor 1023 (individual)Code":
 
                 wb = process_contractor_tds(uploaded_file)
 
