@@ -267,6 +267,13 @@ def process_contractor_1024_tds(uploaded_file):
         f'=SUM(J7:J{total_row-1})'
     )
 
+    # CROSS CHECK TOTAL
+    ws.cell(total_row, 12).value = (
+        f'=SUM(L7:L{total_row-1})'
+    )
+
+
+
     # APPLY BORDERS
     for col in range(1, 15):
 

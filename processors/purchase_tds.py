@@ -109,12 +109,18 @@ def process_purchase_tds(uploaded_file):
 
         excel_row = start_row + 1 + index
 
-        # TAXABLE VALUE
+       
+               # TAXABLE VALUE
+        discount = row['Discount A/c']
+
+        if pd.isna(discount):
+            discount = 0
+
         taxable_value = (
             row['Raw Materials & Additives']
-            - row['Discount A/c']
+            - discount
         )
-
+        
         # DATE
         date_cell = ws.cell(excel_row, 1)
 
@@ -209,6 +215,12 @@ def process_purchase_tds(uploaded_file):
     # TDS TOTAL
     ws.cell(total_row, 12).value = (
         f'=SUM(L7:L{total_row-1})'
+    )
+
+
+    # CROSS CHECK TOTAL
+    ws.cell(total_row, 14).value = (
+        f'=SUM(N7:N{total_row-1})'
     )
 
     # APPLY BORDER TO TOTAL ROW
